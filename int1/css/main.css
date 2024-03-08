@@ -1,0 +1,132 @@
+  @font-face {
+    font-family: 'Standard';
+    src: url('webfonts/standard-book-webfont.woff2') format('woff2');
+    font-weight:normal;
+  }
+
+  @font-face {
+    font-family: 'Standard';
+    src: url('webfonts/standard-book-italic-webfont.woff2') format('woff2');
+    font-weight:normal;
+    font-style:italic
+  }
+
+  @font-face {
+    font-family: 'Standard';
+    src: url('webfonts/standard-bold-webfont.woff2') format('woff2');
+    font-weight:bold;
+  }
+
+  @font-face {
+    font-family: 'Standard';
+    src: url('webfonts/standard-bold-italic-webfont.woff2') format('woff2');
+    font-weight:bold;
+    font-style:italic
+  }
+
+
+  *,
+  a::after,
+  a::before {
+    box-sizing:border-box;
+    clear:all;
+    padding:0;
+    margin:0;
+  }
+
+  body {
+    font-family:'Standard';
+    background-color: red;
+
+    transition: background-color 0.5s ease-in-out;
+    min-height:5000px;
+  }
+
+h1 {
+    position:fixed;
+    right:0;
+    text-align:right;
+    padding:1rem;
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 400;
+    font-style: normal;
+    font-size:1em;
+}
+
+  h3 {
+    /* display:inline-block; */
+    font-size:4em;
+
+    transition: margin-left 0.2s ease-in-out;
+  }
+
+  h3::after {
+    content: '/  ';
+    margin-right:0.5em;
+  }
+
+  h3:hover {
+    margin-left: 2vw;
+    text-transform: uppercase;
+
+    transition: margin-left 0.2s ease-in-out;
+  }
+
+.circle {
+    width:50px; height:50px;
+    border-radius:50%;
+    background:black;
+    display:inline-block;
+    margin:1rem;
+
+    transition: transform 0.4s ease-in-out;
+}
+
+.circle:hover,
+.circle.active {
+    transform:scale(30%);
+}
+
+.secondHand {
+  width:250px; height:50px;
+  background: black;
+  position:fixed;
+  top:1em;
+  left:375px;
+
+  border-radius: 25px;
+
+  transform-origin: 25px 25px;
+}
+
+#handText {
+  position:relative;
+  top:1em;
+
+  color:white;
+  left: 0.9em;
+}
+
+#students {
+    padding:1rem;
+    /* width:80%;    */
+    
+}
+
+.student {
+  transition: padding-bottom 0.5s ease !important;
+}
+
+.student:hover {
+  color:rgba(0,0,0,0.5);
+}
+
+.activeStudent {
+  text-transform: uppercase;
+  color: white;
+  padding-bottom: 20vh !important;
+}
+
+.activeStudent:hover {
+  color: white;
+}
