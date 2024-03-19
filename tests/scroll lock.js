@@ -93,7 +93,7 @@ $(".akL").on("click", function () {
     {
       scrollLeft: 9826,
     },
-    2500
+    1000
   );
 });
 
@@ -103,31 +103,8 @@ $(".tkL").on("click", function () {
     {
       scrollLeft: 5396,
     },
-    2500
+    1000
   );
 });
 
-$(".erL").on("click", function () {
-  console.log("clicked");
-  $("html, body").animate(
-    {
-      scrollLeft: 2887,
-    },
-    2500
-  );
-});
-
-$(".saL").on("click", function () {
-  console.log("clicked");
-  $("html, body").animate(
-    {
-      scrollLeft: 903,
-    },
-    2500
-  );
-});
-
-function setActive() {
-  $(this).addClass("active");
-  $();
-}
+// scroll lock script
