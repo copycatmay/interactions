@@ -2,12 +2,13 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  opacity: 1;
 
   cursor: ew-resize;
 }
 
 body {
-  min-width: 12000px;
+  min-width: 14000px;
 
   overflow-y: hidden;
 }
@@ -39,6 +40,8 @@ body {
 
   max-width: none;
   white-space: nowrap;
+
+  display: none;
 }
 
 /* Fixed */
@@ -122,6 +125,44 @@ body {
   text-decoration: underline;
 }
 
+/* Data Stlying */
+
+#speakers h3 {
+  font-family: neue-haas-grotesk-display, sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  letter-spacing: 0.1rem;
+
+  text-transform: uppercase;
+  font-size: 2rem;
+
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.date {
+  font-style: italic;
+}
+
+.time {
+  text-align: right;
+  font-weight: bold;
+}
+
+.location {
+  text-align: right;
+
+  margin-bottom: 1rem;
+}
+
+.info {
+  line-height: 1.1;
+  width: 70%;
+
+  max-height: 15vh;
+  overflow-y: auto;
+}
+
 /* Speakers */
 
 #speakers {
@@ -129,33 +170,55 @@ body {
   font-weight: 400;
   font-style: normal;
 
-  text-transform: uppercase;
-
   display: overflow;
 }
 
 #anther_kiley {
   position: absolute;
-  top: 0;
-  left: 10972px !important;
+  top: 50%;
+  left: 1100px !important;
+
+  z-index: -2;
+
+  transition: padding 2s ease-in-out;
+}
+
+#anther_kiley.activeLink {
+  color: white;
+
+  background-color: black;
+  padding: 16px;
+  top: 0%;
+  padding-top: 28%;
+
+  z-index: 2;
 }
 
 #takahashi_kuan {
   position: absolute;
   top: 0;
-  left: 6000px !important;
+  left: 3200px !important;
 }
 
 #e_roon_kang {
   position: absolute;
   top: 0;
-  left: 3200px !important;
+  left: 6000px !important;
 }
 
 #sebastian_aubin {
   position: absolute;
   top: 0;
-  left: 1100px !important;
+  left: 9500px !important;
+}
+
+.link {
+  transition: opacity 0.2s ease-in-out;
+  opacity: 0;
+}
+
+.link.active {
+  opacity: 1;
 }
 
 /* scroll bar -- https://www.w3schools.com/howto/howto_css_custom_scrollbar.asp */

@@ -1,6 +1,46 @@
 console.log("lets see if this remains in your code");
 console.log("it will");
 
+// reset
+$(window).on("load", function () {
+  setTimeout(function () {
+    window.scrollTo(0, 0);
+  }, 100); // Adjust delay as needed
+});
+
+$(document).ready(function () {
+  // Clone the initial content of #kuan
+
+  let isAppending = false; // Flag to prevent multiple simultaneous append/prepend actions
+
+  $(".info").on("scroll", function () {
+    let initialContent = $(this).children().clone();
+
+    let $this = $(this);
+    let scrollTop = $this.scrollTop();
+    let scrollHeight = $this[0].scrollHeight;
+    let innerHeight = $this.innerHeight();
+
+    // Check if the user has scrolled to the bottom of #kuan
+    if (scrollTop + innerHeight >= scrollHeight - 100 && !isAppending) {
+      isAppending = true;
+      $this.append(initialContent.clone());
+      isAppending = false;
+    }
+    // Check if the user has scrolled to the top of #kuan
+    else if (scrollTop <= 100 && !isAppending) {
+      isAppending = true;
+      let clonedContent = initialContent.clone();
+      let contentHeightBefore = $this[0].scrollHeight;
+      $this.prepend(clonedContent); // Prepend a copy of the initial content
+      let contentHeightAfter = $this[0].scrollHeight;
+      // Adjust scroll position to maintain view, considering the height of the prepended content
+      $this.scrollTop(scrollTop + (contentHeightAfter - contentHeightBefore));
+      isAppending = false;
+    }
+  });
+});
+
 // increase letterspacing based on scroll distance
 $(window).scroll(function () {
   let scroll = $(window).scrollLeft();
@@ -51,7 +91,10 @@ $(window).scroll(function () {
 
 $("#start").on("click", function (e) {
   e.preventDefault();
-  console.log("clicked");
+  $(".link").addClass("active");
+  $(".event").removeClass("activeLink");
+
+  console.log("start clicked");
   $("html, body").animate(
     {
       scrollLeft: 0,
@@ -87,41 +130,57 @@ $(".debug button").on("click", function () {
   $("#sebastianDist").text($(".saL").css("margin-left"));
 });
 
-$(".akL").on("click", function () {
-  console.log("clicked");
-  $("html, body").animate(
-    {
-      scrollLeft: 9826,
-    },
-    2500
-  );
-});
+$(".saL").on("click", function () {
+  $(".event").removeClass("activeLink");
+  $("#sebastian_aubin").addClass("activeLink");
+  $(".link").addClass("active");
+  $(this).removeClass("active");
 
-$(".tkL").on("click", function () {
-  console.log("clicked");
   $("html, body").animate(
     {
-      scrollLeft: 5396,
+      scrollLeft: 9136,
     },
     2500
   );
 });
 
 $(".erL").on("click", function () {
-  console.log("clicked");
+  $(".event").removeClass("activeLink");
+  $("#e_roon_kang").addClass("activeLink");
+  $(".link").addClass("active");
+  $(this).removeClass("active");
+
   $("html, body").animate(
     {
-      scrollLeft: 2887,
+      scrollLeft: 5561,
     },
     2500
   );
 });
 
-$(".saL").on("click", function () {
-  console.log("clicked");
+$(".tkL").on("click", function () {
+  $(".event").removeClass("activeLink");
+  $("#takahashi_kuan").addClass("activeLink");
+  $(".link").addClass("active");
+  $(this).removeClass("active");
+
   $("html, body").animate(
     {
-      scrollLeft: 903,
+      scrollLeft: 2801,
+    },
+    2500
+  );
+});
+
+$(".akL").on("click", function () {
+  $(".event").removeClass("activeLink");
+  $("#anther_kiley").addClass("activeLink");
+  $(".link").addClass("active");
+  $(this).removeClass("active");
+
+  $("html, body").animate(
+    {
+      scrollLeft: 841,
     },
     2500
   );
@@ -131,3 +190,5 @@ function setActive() {
   $(this).addClass("active");
   $();
 }
+
+// iterated upon https://stackoverflow.com/questions/10072216/jquery-infinite-scroll-with-div-not-scrollbar-of-body
