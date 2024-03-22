@@ -40,8 +40,6 @@ body {
 
   max-width: none;
   white-space: nowrap;
-
-  display: none;
 }
 
 /* Fixed */
@@ -157,10 +155,19 @@ body {
 
 .info {
   line-height: 1.1;
-  width: 70%;
+  width: 60%;
+  font-size: 0.9rem;
 
   max-height: 15vh;
   overflow-y: auto;
+}
+
+.external_links {
+  font-style: italic;
+  font-size: 0.8rem;
+
+  margin-top: 1vh;
+  margin-bottom: 1vh;
 }
 
 /* Speakers */
@@ -196,20 +203,72 @@ body {
 
 #takahashi_kuan {
   position: absolute;
-  top: 0;
+  top: 53%;
   left: 3200px !important;
+
+  z-index: -3;
+
+  transition: padding 2s ease-in-out;
+}
+
+#takahashi_kuan.activeLink {
+  color: white;
+
+  background-color: black;
+  padding: 16px;
+  top: 0%;
+  padding-top: 28%;
+
+  z-index: 2;
 }
 
 #e_roon_kang {
   position: absolute;
-  top: 0;
+  top: 54%;
   left: 6000px !important;
+
+  z-index: -3;
+
+  transition: padding 2s ease-in-out;
+}
+
+#e_roon_kang.activeLink {
+  color: white;
+
+  background-color: black;
+  padding: 16px;
+  top: 0%;
+  padding-top: 28%;
+
+  z-index: 2;
 }
 
 #sebastian_aubin {
   position: absolute;
-  top: 0;
+  top: 56%;
   left: 9500px !important;
+
+  z-index: -3;
+
+  transition: padding 2s ease-in-out;
+}
+
+#sebastian_aubin.activeLink {
+  color: white;
+
+  background-color: black;
+  padding: 16px;
+  top: 0%;
+  padding-top: 28%;
+
+  z-index: 2;
+}
+
+#anther_kiley,
+#takahashi_kuan,
+#e_roon_kang,
+#sebastian_aubin {
+  transition: background-color 1s ease-in-out, padding 1s ease-in-out;
 }
 
 .link {
@@ -240,7 +299,7 @@ body {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: white;
-  border-color: red;
+  border-color: black;
   border-width: 2px;
   border-style: solid;
 }
@@ -249,18 +308,33 @@ body {
 
 img {
   position: absolute;
+  transition: filter 0.2s ease-in-out;
+  filter: drop-shadow(
+    0 0 0 transparent
+  ); /* Default state with no visible drop shadow */
 }
 
-img:hover {
+img:hover,
+img.active {
   border-color: black;
   border-width: 2px;
   border-style: solid;
+  filter: drop-shadow(
+    4px 4px 0vh black
+  ); /* Hover/Active state with visible drop shadow */
 }
 
 img.active {
-  border-color: red;
-  border-width: 2px;
-  border-style: solid;
+  border-color: black;
+
+  filter: drop-shadow(-6px 6px 0vh black);
+
+  position: fixed;
+  top: 25% !important;
+  left: 30% !important;
+
+  width: 70% !important;
+  height: 70% !important;
 }
 
 #imgCaption {
@@ -312,8 +386,6 @@ img.active {
   z-index: -3;
 }
 
-/* more */
-
 #akImg6 {
   top: 5%;
   left: 150%;
@@ -322,7 +394,7 @@ img.active {
   z-index: -1;
 }
 
-#akImg7 {
+#tkImg7 {
   top: 90%;
   left: 180%;
   width: 30%;
@@ -330,7 +402,7 @@ img.active {
   z-index: -3;
 }
 
-#akImg8 {
+#tkImg8 {
   top: 25%;
   left: 220%;
   width: 30%;
@@ -338,7 +410,7 @@ img.active {
   z-index: -1;
 }
 
-#akImg9 {
+#tkImg9 {
   top: 50%;
   left: 320%;
   width: 30%;
@@ -346,7 +418,7 @@ img.active {
   z-index: -3;
 }
 
-#akImg10 {
+#tkImg10 {
   top: 45%;
   left: 385%;
   width: 30%;
@@ -354,7 +426,7 @@ img.active {
   z-index: -1;
 }
 
-#akImg11 {
+#tkImg11 {
   top: 20%;
   left: 395%;
   width: 30%;
@@ -472,6 +544,10 @@ img.active {
   width: 30%;
   height: 30%;
   z-index: -3;
+}
+
+img {
+  object-fit: cover; /* ensure img covers the div without stretching */
 }
 
 /* misc */

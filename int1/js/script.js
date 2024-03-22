@@ -59,11 +59,11 @@ $(window).scroll(function () {
     { selector: "#akImg4", initialLeft: 90, parallaxSpeed: 0.04 },
     { selector: "#akImg5", initialLeft: 70, parallaxSpeed: 0.05 },
     { selector: "#akImg6", initialLeft: 150, parallaxSpeed: 0.02 },
-    { selector: "#akImg7", initialLeft: 180, parallaxSpeed: 0.01 },
-    { selector: "#akImg8", initialLeft: 220, parallaxSpeed: 0.03 },
-    { selector: "#akImg9", initialLeft: 320, parallaxSpeed: 0.04 },
-    { selector: "#akImg10", initialLeft: 385, parallaxSpeed: 0.05 },
-    { selector: "#akImg11", initialLeft: 395, parallaxSpeed: 0.02 },
+    { selector: "#tkImg7", initialLeft: 180, parallaxSpeed: 0.01 },
+    { selector: "#tkImg8", initialLeft: 220, parallaxSpeed: 0.03 },
+    { selector: "#tkImg9", initialLeft: 320, parallaxSpeed: 0.04 },
+    { selector: "#tkImg10", initialLeft: 385, parallaxSpeed: 0.05 },
+    { selector: "#tkImg11", initialLeft: 395, parallaxSpeed: 0.02 },
     { selector: "#akImg12", initialLeft: 420, parallaxSpeed: 0.01 },
     { selector: "#akImg13", initialLeft: 455, parallaxSpeed: 0.03 },
     { selector: "#akImg14", initialLeft: 495, parallaxSpeed: 0.01 },
@@ -84,8 +84,11 @@ $(window).scroll(function () {
 
   // Iterate over each image configuration and apply the parallax effect
   imagesConfig.forEach((img) => {
-    let newPos = img.initialLeft - scroll * img.parallaxSpeed;
-    $(img.selector).css("left", newPos + "%");
+    if (!$(img.selector).hasClass("active")) {
+      // Check if the image does not have the 'active' class
+      let newPos = img.initialLeft - scroll * img.parallaxSpeed;
+      $(img.selector).css("left", newPos + "%");
+    }
   });
 });
 
@@ -103,20 +106,17 @@ $("#start").on("click", function (e) {
   );
 });
 
-$("img").on("click", function () {
-  $("img").removeClass("active");
-  $(this).addClass("active");
-  // Extract data from the clicked image
-  // For demonstration, using the image's 'src' attribute as the data
+$(document).on("click", "img", function () {
+  // Remove 'active' class from all images except the clicked one
+  $("img").not(this).removeClass("active");
+
+  // Toggle the 'active' class on the clicked image
+  $(this).toggleClass("active");
+
+  // Continue with the rest of your logic for when an image is clicked
   let caption = $(this).data("caption");
-
-  // Update the #imgCaption paragraph with the extracted data
   $("#imgCaption").fadeOut(300, function () {
-    // Once the fadeOut completes, update the text
-    $(this).text(caption);
-
-    // Then, fade in the updated caption
-    $(this).fadeIn(300);
+    $(this).text(caption).fadeIn(300);
   });
 });
 
