@@ -2,10 +2,8 @@ console.log("lets see if this remains in your code");
 console.log("it will");
 
 // reset
-$(window).on("load", function () {
-  setTimeout(function () {
-    window.scrollTo(0, 0);
-  }, 100); // Adjust delay as needed
+$(function () {
+  window.scrollTo(0, 0);
 });
 
 $(document).ready(function () {
@@ -64,22 +62,20 @@ $(window).scroll(function () {
     { selector: "#tkImg9", initialLeft: 320, parallaxSpeed: 0.04 },
     { selector: "#tkImg10", initialLeft: 385, parallaxSpeed: 0.05 },
     { selector: "#tkImg11", initialLeft: 395, parallaxSpeed: 0.02 },
-    { selector: "#akImg12", initialLeft: 420, parallaxSpeed: 0.01 },
-    { selector: "#akImg13", initialLeft: 455, parallaxSpeed: 0.03 },
-    { selector: "#akImg14", initialLeft: 495, parallaxSpeed: 0.01 },
-    { selector: "#akImg15", initialLeft: 500, parallaxSpeed: 0.02 },
-    { selector: "#akImg16", initialLeft: 540, parallaxSpeed: 0.01 },
-    { selector: "#akImg17", initialLeft: 570, parallaxSpeed: 0.02 },
-    { selector: "#akImg18", initialLeft: 610, parallaxSpeed: 0.04 },
-    { selector: "#akImg19", initialLeft: 660, parallaxSpeed: 0.05 },
-    { selector: "#akImg20", initialLeft: 690, parallaxSpeed: 0.02 },
-    { selector: "#akImg21", initialLeft: 720, parallaxSpeed: 0.03 },
-    { selector: "#akImg22", initialLeft: 780, parallaxSpeed: 0.01 },
-    { selector: "#akImg23", initialLeft: 840, parallaxSpeed: 0.02 },
-    { selector: "#akImg24", initialLeft: 855, parallaxSpeed: 0.03 },
-    { selector: "#akImg25", initialLeft: 900, parallaxSpeed: 0.02 },
-    // Add more configurations here for each image
-    // {selector: '#imageId', initialLeft: initialValue, parallaxSpeed: speedValue},
+    { selector: "#erImg12", initialLeft: 420, parallaxSpeed: 0.01 },
+    { selector: "#erImg13", initialLeft: 455, parallaxSpeed: 0.03 },
+    { selector: "#erImg14", initialLeft: 495, parallaxSpeed: 0.01 },
+    { selector: "#erImg15", initialLeft: 500, parallaxSpeed: 0.02 },
+    { selector: "#erImg16", initialLeft: 540, parallaxSpeed: 0.01 },
+    { selector: "#erImg17", initialLeft: 570, parallaxSpeed: 0.02 },
+    { selector: "#erImg18", initialLeft: 610, parallaxSpeed: 0.04 },
+    { selector: "#erImg19", initialLeft: 660, parallaxSpeed: 0.05 },
+    { selector: "#saImg20", initialLeft: 690, parallaxSpeed: 0.02 },
+    { selector: "#saImg21", initialLeft: 720, parallaxSpeed: 0.03 },
+    { selector: "#saImg22", initialLeft: 780, parallaxSpeed: 0.01 },
+    { selector: "#saImg23", initialLeft: 840, parallaxSpeed: 0.02 },
+    { selector: "#saImg24", initialLeft: 855, parallaxSpeed: 0.03 },
+    { selector: "#saImg25", initialLeft: 900, parallaxSpeed: 0.02 },
   ];
 
   // Iterate over each image configuration and apply the parallax effect
@@ -107,29 +103,28 @@ $("#start").on("click", function (e) {
 });
 
 $(document).on("click", "img", function () {
-  // Remove 'active' class from all images except the clicked one
   $("img").not(this).removeClass("active");
-
-  // Toggle the 'active' class on the clicked image
   $(this).toggleClass("active");
 
-  // Continue with the rest of your logic for when an image is clicked
+  $(window).scroll();
   let caption = $(this).data("caption");
   $("#imgCaption").fadeOut(300, function () {
     $(this).text(caption).fadeIn(300);
   });
 });
 
-$(".debug button").on("click", function () {
-  let scroll = $(window).scrollLeft();
-  $(this).text("scroll distance: " + scroll);
+//debugging
+// $(".debug button").on("click", function () {
+//   let scroll = $(window).scrollLeft();
+//   $(this).text("scroll distance: " + scroll);
 
-  $("#antherDist").text($(".akL").css("margin-left"));
-  $("#takahashiDist").text($(".tkL").css("margin-left"));
-  $("#eRoonDist").text($(".erL").css("margin-left"));
-  $("#sebastianDist").text($(".saL").css("margin-left"));
-});
+//   $("#antherDist").text($(".akL").css("margin-left"));
+//   $("#takahashiDist").text($(".tkL").css("margin-left"));
+//   $("#eRoonDist").text($(".erL").css("margin-left"));
+//   $("#sebastianDist").text($(".saL").css("margin-left"));
+// });
 
+// scroll for links
 $(".saL").on("click", function () {
   $(".event").removeClass("activeLink");
   $("#sebastian_aubin").addClass("activeLink");
@@ -144,6 +139,7 @@ $(".saL").on("click", function () {
   );
 });
 
+// eroon kang
 $(".erL").on("click", function () {
   $(".event").removeClass("activeLink");
   $("#e_roon_kang").addClass("activeLink");
@@ -158,6 +154,7 @@ $(".erL").on("click", function () {
   );
 });
 
+// takahashi kuan
 $(".tkL").on("click", function () {
   $(".event").removeClass("activeLink");
   $("#takahashi_kuan").addClass("activeLink");
@@ -172,6 +169,7 @@ $(".tkL").on("click", function () {
   );
 });
 
+// anther kiley
 $(".akL").on("click", function () {
   $(".event").removeClass("activeLink");
   $("#anther_kiley").addClass("activeLink");
