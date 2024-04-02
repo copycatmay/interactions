@@ -6,39 +6,6 @@ $(function () {
   window.scrollTo(0, 0);
 });
 
-$(document).ready(function () {
-  // Clone the initial content of #kuan
-
-  let isAppending = false; // Flag to prevent multiple simultaneous append/prepend actions
-
-  $(".info").on("scroll", function () {
-    let initialContent = $(this).children().clone();
-
-    let $this = $(this);
-    let scrollTop = $this.scrollTop();
-    let scrollHeight = $this[0].scrollHeight;
-    let innerHeight = $this.innerHeight();
-
-    // Check if the user has scrolled to the bottom of #kuan
-    if (scrollTop + innerHeight >= scrollHeight - 100 && !isAppending) {
-      isAppending = true;
-      $this.append(initialContent.clone());
-      isAppending = false;
-    }
-    // Check if the user has scrolled to the top of #kuan
-    else if (scrollTop <= 100 && !isAppending) {
-      isAppending = true;
-      let clonedContent = initialContent.clone();
-      let contentHeightBefore = $this[0].scrollHeight;
-      $this.prepend(clonedContent); // Prepend a copy of the initial content
-      let contentHeightAfter = $this[0].scrollHeight;
-      // Adjust scroll position to maintain view, considering the height of the prepended content
-      $this.scrollTop(scrollTop + (contentHeightAfter - contentHeightBefore));
-      isAppending = false;
-    }
-  });
-});
-
 // increase letterspacing based on scroll distance
 $(window).scroll(function () {
   let scroll = $(window).scrollLeft();
@@ -86,11 +53,32 @@ $(window).scroll(function () {
       $(img.selector).css("left", newPos + "%");
     }
   });
+
+  // v hides non-focused links
+  let scrollPosition = $(window).scrollLeft();
+  let $activeLink = $(".activeLink");
+
+  if ($activeLink.length === 0) {
+    return;
+  }
+
+  let activeLinkPosition = $activeLink.offset().left - 200; // adjusted since it calcs. to the very right of the div
+  let distance = Math.abs(scrollPosition - activeLinkPosition);
+  let withinRange = distance <= 500;
+
+  let $otherLinks = $(".link").filter(".active");
+
+  if (withinRange) {
+    $otherLinks.css("opacity", 0); //hide
+  } else {
+    $otherLinks.css("opacity", 0.2); //show
+  }
 });
 
+// return to start ----------------------------------------------
 $("#start").on("click", function (e) {
   e.preventDefault();
-  $(".link").addClass("active");
+  $(".link").addClass("active").css("opacity", 0.2);
   $(".event").removeClass("activeLink");
 
   console.log("start clicked");
@@ -102,6 +90,7 @@ $("#start").on("click", function (e) {
   );
 });
 
+// img click func. ----------------------------------------------
 $(document).on("click", "img", function () {
   $("img").not(this).removeClass("active");
   $(this).toggleClass("active");
@@ -113,27 +102,17 @@ $(document).on("click", "img", function () {
   });
 });
 
-//debugging
-// $(".debug button").on("click", function () {
-//   let scroll = $(window).scrollLeft();
-//   $(this).text("scroll distance: " + scroll);
-
-//   $("#antherDist").text($(".akL").css("margin-left"));
-//   $("#takahashiDist").text($(".tkL").css("margin-left"));
-//   $("#eRoonDist").text($(".erL").css("margin-left"));
-//   $("#sebastianDist").text($(".saL").css("margin-left"));
-// });
-
 // scroll for links
 $(".saL").on("click", function () {
   $(".event").removeClass("activeLink");
   $("#sebastian_aubin").addClass("activeLink");
   $(".link").addClass("active");
   $(this).removeClass("active");
+  $(this).css("opacity", 1);
 
   $("html, body").animate(
     {
-      scrollLeft: 9136,
+      scrollLeft: $("#sebastian_aubin").offset().left - 350,
     },
     2500
   );
@@ -145,10 +124,11 @@ $(".erL").on("click", function () {
   $("#e_roon_kang").addClass("activeLink");
   $(".link").addClass("active");
   $(this).removeClass("active");
+  $(this).css("opacity", 1);
 
   $("html, body").animate(
     {
-      scrollLeft: 5561,
+      scrollLeft: $("#e_roon_kang").offset().left - 425,
     },
     2500
   );
@@ -160,10 +140,11 @@ $(".tkL").on("click", function () {
   $("#takahashi_kuan").addClass("activeLink");
   $(".link").addClass("active");
   $(this).removeClass("active");
+  $(this).css("opacity", 1);
 
   $("html, body").animate(
     {
-      scrollLeft: 2801,
+      scrollLeft: $("#takahashi_kuan").offset().left - 385,
     },
     2500
   );
@@ -175,10 +156,11 @@ $(".akL").on("click", function () {
   $("#anther_kiley").addClass("activeLink");
   $(".link").addClass("active");
   $(this).removeClass("active");
+  $(this).css("opacity", 1);
 
   $("html, body").animate(
     {
-      scrollLeft: 841,
+      scrollLeft: $("#anther_kiley").offset().left - 250,
     },
     2500
   );
@@ -189,4 +171,24 @@ function setActive() {
   $();
 }
 
+// toggle image selection. ----------------------------------------------
+// $(document).on("mousedown", function () {
+//   $(".event").each(function () {
+//     if ($(this).hasClass("activeLink")) {
+//       let currentId = $(this).attr("id");
+//       if (currentId === "anther_kiley") {
+//         console.log("Anther Kiley is active");
+//         $(".anther_kileyImg").addClass("active");
+//       } else if (currentId === "e_roon_kang") {
+//         console.log("E Roon Kang is active");
+//       } else if (currentId === "takahashi_kuan") {
+//         console.log("Takahashi Kuan is active");
+//       } else if (currentId === "sebastian_aubin") {
+//         console.log("Sebastian Aubin is active");
+//       }
+//     }
+//   });
+// });
+
 // iterated upon https://stackoverflow.com/questions/10072216/jquery-infinite-scroll-with-div-not-scrollbar-of-body
+// With help from GPT-4

@@ -5,6 +5,9 @@
   opacity: 1;
 
   cursor: ew-resize;
+
+  scrollbar-width: thin;
+  scrollbar-color: black transparent; /* thumb and track color */
 }
 
 body {
@@ -35,7 +38,7 @@ body {
 }
 
 #mainTitle h1 {
-  top: -16%;
+  top: -12%;
   left: 0;
 
   transform: translateX(-0.5%);
@@ -48,6 +51,8 @@ body {
 
 .sticky {
   position: fixed;
+
+  z-index: 4;
 }
 
 #subTitle {
@@ -61,8 +66,6 @@ body {
 
   top: 40vh;
   left: 10vw;
-
-  text-transform: uppercase;
 
   transition: all 0.3s ease-in-out;
 
@@ -98,15 +101,12 @@ body {
 .link {
   color: black;
   text-decoration: underline;
-}
+  font-size: 1.5rem;
 
-@keyframes slide {
-  from {
-    transform: translateX(100vw);
-  }
-  to {
-    transform: translateX(-100%);
-  }
+  transition: opacity 0.2s ease-in-out;
+  opacity: 1;
+
+  z-index: 2;
 }
 
 .link:hover {
@@ -138,6 +138,8 @@ body {
 
   display: inline-block;
   white-space: nowrap;
+
+  opacity: 0;
 }
 
 .date {
@@ -193,14 +195,14 @@ body {
 }
 
 #anther_kiley.activeLink {
-  color: white;
+  color: black;
 
-  background-color: black;
+  background-color: white;
   padding: 16px;
   top: 0%;
-  padding-top: 28%;
+  padding-top: 49vh;
 
-  z-index: 2;
+  z-index: 1;
 }
 
 #takahashi_kuan {
@@ -214,14 +216,14 @@ body {
 }
 
 #takahashi_kuan.activeLink {
-  color: white;
+  color: black;
 
-  background-color: black;
+  background-color: white;
   padding: 16px;
   top: 0%;
-  padding-top: 28%;
+  padding-top: 48vh;
 
-  z-index: 2;
+  z-index: 1;
 }
 
 #e_roon_kang {
@@ -235,14 +237,14 @@ body {
 }
 
 #e_roon_kang.activeLink {
-  color: white;
+  color: black;
 
-  background-color: black;
+  background-color: white;
   padding: 16px;
   top: 0%;
-  padding-top: 28%;
+  padding-top: 57vh;
 
-  z-index: 2;
+  z-index: 1;
 }
 
 #sebastian_aubin {
@@ -256,14 +258,14 @@ body {
 }
 
 #sebastian_aubin.activeLink {
-  color: white;
+  color: black;
 
-  background-color: black;
+  background-color: white;
   padding: 16px;
   top: 0%;
-  padding-top: 28%;
+  padding-top: 60vh;
 
-  z-index: 2;
+  z-index: 1;
 }
 
 #anther_kiley,
@@ -273,17 +275,21 @@ body {
   transition: background-color 1s ease-in-out, padding 1s ease-in-out;
 }
 
-.link {
-  transition: opacity 0.2s ease-in-out;
-  opacity: 0;
+.link.active {
+  opacity: 0.2;
 }
 
-.link.active {
-  opacity: 1;
+.link.active:hover {
+  opacity: 0.5;
+}
+
+.above {
+  z-index: 99;
 }
 
 /* scroll bar -- https://www.w3schools.com/howto/howto_css_custom_scrollbar.asp */
 
+/* For WebKit (Safari, Chrome) */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -304,6 +310,11 @@ body {
   border-color: black;
   border-width: 2px;
   border-style: solid;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: white;
+  border: 2px solid black;
 }
 
 /* images */
@@ -339,12 +350,14 @@ img.active {
   left: 20vw !important;
 
   min-width: 80vw !important;
-  width: 80vh !important;
+  width: 80vw !important;
   height: 80vh !important;
 }
 
 #imgCaption {
   font-style: italic;
+
+  font-weight: lighter;
 }
 
 #akImg1 {
@@ -568,11 +581,23 @@ img.active {
   display: none;
 }
 
+/* animations */
+
+@keyframes slide {
+  from {
+    transform: translateX(-150%);
+  }
+  to {
+    transform: translateX(100vw);
+  }
+}
+
 /* smaller viewports */
 
 @media (max-width: 600px) {
   body {
-    max-height: 100vh !important;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    overflow-y: auto; /* Enable vertical scroll */
     max-width: 100vw !important;
   }
 
@@ -626,28 +651,38 @@ img.active {
   }
 
   img {
-    position: static;
-    width: 10vw;
-    height: 10vh;
+    position: relative;
+    width: 30vw;
+    height: 30vh;
 
     display: inline-block;
+
+    margin-left: 1rem;
+    margin-top: 1rem;
+
+    z-index: 2;
   }
 
-  img.active {
-    position: static;
+  img.activeMobile {
+    position: relative;
     top: 0;
     left: 0;
-    width: 20vw;
-    height: 20vw;
+    width: 80vw;
+    height: 70vh;
 
     filter: none;
 
-    z-index: 999;
+    z-index: 10;
   }
+
+  /* .images.active {
+    filter: blur(5px);
+  } */
 
   .link,
   #start,
-  .debug {
+  .debug,
+  #speakers {
     display: none;
   }
 
@@ -655,8 +690,82 @@ img.active {
     font-size: 2rem;
     top: -10%;
   }
+  #subTitle {
+    top: 10vh;
 
-  #speakers {
-    display: none;
+    left: 40vw;
+
+    animation: none;
+
+    z-index: 99;
+  }
+
+  .mobileData {
+    overflow: scroll;
+    position: fixed;
+    display: block;
+
+    top: 20vh;
+    left: 40vw;
+
+    height: 70vh;
+    max-height: 70vh;
+    width: 80vw;
+  }
+
+  .mobileDataContent {
+    font-family: neue-haas-grotesk-display, sans-serif;
+    font-weight: 400;
+
+    font-size: 0.8rem;
+    text-align: left;
+  }
+
+  .time {
+    text-align: left;
+  }
+
+  .location {
+    text-align: left;
+  }
+
+  .info {
+    text-align: left;
+
+    max-height: none;
+  }
+
+  .slide-up {
+    top: -100vh; /* Move div out of view */
+  }
+
+  .scrollDist {
+    font-size: 40px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
+
+  .mobileTitle {
+    font-family: roc-grotesk-extrawide, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+    text-transform: uppercase;
+    font-size: 7rem;
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    pointer-events: none;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+
+    min-height: 1000vh;
+
+    z-index: -2;
   }
 }
