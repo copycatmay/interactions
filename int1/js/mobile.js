@@ -1,5 +1,13 @@
 console.log("lets see if this remains in your code");
-console.log("it will");
+console.log(` ▄▀▀█▄   ▄▀▀▄ ▀▄  ▄▀▀█▄▄       ▄▀▀█▀▄    ▄▀▀▀█▀▀▄      ▄▀▀▄    ▄▀▀▄  ▄▀▀█▀▄   ▄▀▀▀▀▄    ▄▀▀▀▀▄     
+▐ ▄▀ ▀▄ █  █ █ █ █ ▄▀   █     █   █  █  █    █  ▐     █   █    ▐  █ █   █  █ █    █    █    █      
+  █▄▄▄█ ▐  █  ▀█ ▐ █    █     ▐   █  ▐  ▐   █         ▐  █        █ ▐   █  ▐ ▐    █    ▐    █      
+ ▄▀   █   █   █    █    █         █        █            █   ▄    █      █        █         █       
+█   ▄▀  ▄▀   █    ▄▀▄▄▄▄▀      ▄▀▀▀▀▀▄   ▄▀              ▀▄▀ ▀▄ ▄▀   ▄▀▀▀▀▀▄   ▄▀▄▄▄▄▄▄▀ ▄▀▄▄▄▄▄▄▀ 
+▐   ▐   █    ▐   █     ▐      █       █ █                      ▀    █       █  █         █         
+        ▐        ▐            ▐       ▐ ▐                           ▐       ▐  ▐         ▐         `);
+
+// reset
 
 // reset
 $(function () {
@@ -16,4 +24,9 @@ $(document).on("click", "img", function () {
   });
 });
 
-let currentSection = null; // Track the current section
+$(".mobileData").scroll(function () {
+  let scroll = $(".mobileData").scrollTop();
+  $(".mobileTitle").css("top", -scroll / 4.5 + "px");
+
+  console.log("scroll: ", scroll);
+});

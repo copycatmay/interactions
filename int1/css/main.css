@@ -29,18 +29,13 @@ body {
   position: absolute;
   max-width: none;
 
-  top: -20%;
-  left: 0;
+  top: -0.9em;
+  left: -0.2em;
 
   pointer-events: none;
 }
 
 #mainTitle h1 {
-  top: -12%;
-  left: 0;
-
-  transform: translateX(-0.5%);
-
   max-width: none;
   white-space: nowrap;
 }
@@ -99,18 +94,14 @@ body {
   text-decoration: underline;
   font-size: 1.5rem;
 
-  transition: opacity 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out, letter-spacing 0.2s ease-in-out;
   opacity: 1;
 
   z-index: 2;
 }
 
 .link:hover {
-  border-color: black;
-  border-width: 2px;
-  border-style: solid;
-
-  padding-left: 1rem;
+  letter-spacing: 0.1rem;
 }
 
 #start {
@@ -155,6 +146,7 @@ body {
 }
 
 .date {
+  font-size: 1.2rem;
 }
 
 .time {
@@ -162,6 +154,9 @@ body {
 }
 
 .location {
+  line-height: 0.9rem;
+
+  font-size: 0.8rem;
   margin-bottom: 1rem;
 }
 
@@ -211,8 +206,7 @@ body {
 
   background-color: white;
   padding: 16px;
-  top: 0%;
-  padding-top: 49vh;
+  top: 48vh;
 
   z-index: 1;
 }
@@ -232,8 +226,7 @@ body {
 
   background-color: white;
   padding: 16px;
-  top: 0%;
-  padding-top: 48vh;
+  top: 46vh;
 
   z-index: 1;
 }
@@ -253,8 +246,7 @@ body {
 
   background-color: white;
   padding: 16px;
-  top: 0%;
-  padding-top: 57vh;
+  top: 54vh;
 
   z-index: 1;
 }
@@ -274,8 +266,7 @@ body {
 
   background-color: white;
   padding: 16px;
-  top: 0%;
-  padding-top: 60vh;
+  top: 56vh;
 
   z-index: 1;
 }
@@ -289,6 +280,7 @@ body {
 
 .link.active {
   opacity: 0.2;
+  font-size: 1.2rem;
 }
 
 .link.active:hover {
@@ -715,13 +707,9 @@ img.active {
   .debug,
   #speakers,
   #imgCaption,
-  #subTitle {
-    display: none !important;
-  }
-
+  #subTitle,
   #mainTitle {
-    font-size: 2rem;
-    top: -10%;
+    display: none !important;
   }
 
   .mobileData {
@@ -772,17 +760,19 @@ img.active {
     font-style: normal;
 
     text-transform: uppercase;
-    font-size: 0.8rem;
+    font-size: 3rem;
 
     position: fixed;
 
-    top: 0;
-    left: 3vw;
+    top: -0.3em;
+    left: -0.7em;
 
     pointer-events: none;
     writing-mode: vertical-rl;
     text-orientation: mixed;
 
     z-index: -2;
+
+    white-space: nowrap;
   }
 }
